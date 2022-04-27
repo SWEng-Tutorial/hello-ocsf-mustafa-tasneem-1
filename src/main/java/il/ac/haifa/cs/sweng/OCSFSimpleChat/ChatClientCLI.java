@@ -30,10 +30,25 @@ public class ChatClientCLI {
 						message = reader.readLine();
 						if (message.isBlank())
 							continue;
-							client.sendToServer(message);
+
+						if (message.equalsIgnoreCase("#exit")) {
+							System.out.println("Closing connection.");
+							client.closeConnection();
+						} else if (message.equalsIgnoreCase("#sendSubmitters")) {
+							client.sendToServer("Tasneem, Mustafa");
+						} else if (message.equalsIgnoreCase("#sendSubmittersID")) {
+							client.sendToServer("319073052, 318577921");
+						} else if (message.equalsIgnoreCase("#echoHello")) {
+							client.sendToServer("Hello World!");
+						} else if ((message.substring(0, message.indexOf(" "))).equalsIgnoreCase("#send")) {
+							client.sendToServer((message.substring(message.indexOf(" "))));
+
+						}
 					} catch (IOException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+
 
 				}
 			}
